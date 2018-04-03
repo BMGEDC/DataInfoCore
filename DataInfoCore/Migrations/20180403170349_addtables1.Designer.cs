@@ -11,9 +11,10 @@ using System;
 namespace DataInfoCore.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180403170349_addtables1")]
+    partial class addtables1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,8 +104,7 @@ namespace DataInfoCore.Migrations
                     b.Property<string>("MarketCode")
                         .HasMaxLength(6);
 
-                    b.Property<string>("MarketName")
-                        .HasMaxLength(100);
+                    b.Property<string>("MarketName");
 
                     b.Property<string>("Status")
                         .HasMaxLength(1);

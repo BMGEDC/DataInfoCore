@@ -21,5 +21,6 @@ namespace DataInfoCore.Data
         public DbSet<Wholesaler> Wholesaler { get; set; }
         public DbSet<Contact> Contact { get; set; }
         public DbSet<Communication> Communication { get; set; }
+        public DbSet<Processlog> Processlog { get; set; }
     }
 }
