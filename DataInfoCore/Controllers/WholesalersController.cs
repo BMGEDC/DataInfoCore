@@ -10,22 +10,22 @@ using DataInfoCore.Models;
 
 namespace DataInfoCore.Controllers
 {
-    public class MarketsController : Controller
+    public class WholesalersController : Controller
     {
         private readonly DataContext _context;
 
-        public MarketsController(DataContext context)
+        public WholesalersController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: Markets
+        // GET: Wholesalers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Market.ToListAsync());
+            return View(await _context.Wholesaler.ToListAsync());
         }
 
-        // GET: Markets/Details/5
+        // GET: Wholesalers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace DataInfoCore.Controllers
                 return NotFound();
             }
 
-            var market = await _context.Market
+            var wholesaler = await _context.Wholesaler
                 .SingleOrDefaultAsync(m => m.ID == id);
-            if (market == null)
+            if (wholesaler == null)
             {
                 return NotFound();
             }
 
-            return View(market);
+            return View(wholesaler);
         }
 
-        // GET: Markets/Create
+        // GET: Wholesalers/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Markets/Create
+        // POST: Wholesalers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,MarketCode,MarketName,Eorders,Status")] Market market)
+        public async Task<IActionResult> Create([Bind("ID,Market,WholesalerCode,WholesalerName,ETSUser,InBook,Online,DailyFeed,CustomerFeed,Comments,ETSLocation")] Wholesaler wholesaler)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(market);
+                _context.Add(wholesaler);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(market);
+            return View(wholesaler);
         }
 
-        // GET: Markets/Edit/5
+        // GET: Wholesalers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace DataInfoCore.Controllers
                 return NotFound();
             }
 
-            var market = await _context.Market.SingleOrDefaultAsync(m => m.ID == id);
-            if (market == null)
+            var wholesaler = await _context.Wholesaler.SingleOrDefaultAsync(m => m.ID == id);
+            if (wholesaler == null)
             {
                 return NotFound();
             }
-            return View(market);
+            return View(wholesaler);
         }
 
-        // POST: Markets/Edit/5
+        // POST: Wholesalers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,MarketCode,MarketName,Eorders,Status")] Market market)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Market,WholesalerCode,WholesalerName,ETSUser,InBook,Online,DailyFeed,CustomerFeed,Comments,ETSLocation")] Wholesaler wholesaler)
         {
-            if (id != market.ID)
+            if (id != wholesaler.ID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace DataInfoCore.Controllers
             {
                 try
                 {
-                    _context.Update(market);
+                    _context.Update(wholesaler);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MarketExists(market.ID))
+                    if (!WholesalerExists(wholesaler.ID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace DataInfoCore.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(market);
+            return View(wholesaler);
         }
 
-        // GET: Markets/Delete/5
+        // GET: Wholesalers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace DataInfoCore.Controllers
                 return NotFound();
             }
 
-            var market = await _context.Market
+            var wholesaler = await _context.Wholesaler
                 .SingleOrDefaultAsync(m => m.ID == id);
-            if (market == null)
+            if (wholesaler == null)
             {
                 return NotFound();
             }
 
-            return View(market);
+            return View(wholesaler);
         }
 
-        // POST: Markets/Delete/5
+        // POST: Wholesalers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var market = await _context.Market.SingleOrDefaultAsync(m => m.ID == id);
-            _context.Market.Remove(market);
+            var wholesaler = await _context.Wholesaler.SingleOrDefaultAsync(m => m.ID == id);
+            _context.Wholesaler.Remove(wholesaler);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MarketExists(int id)
+        private bool WholesalerExists(int id)
         {
-            return _context.Market.Any(e => e.ID == id);
+            return _context.Wholesaler.Any(e => e.ID == id);
         }
     }
 }

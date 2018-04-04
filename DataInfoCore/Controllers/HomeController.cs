@@ -13,16 +13,16 @@ namespace DataInfoCore.Controllers
     {
         public IActionResult Index()
         {
-            DataContext dc = new DataContext();
-            var q =
-                    (from a in dc.Market
-                    where a.Status == "A"
-                    select a).OrderBy(x => x.MarketCode);
-            var myObject = q.SingleOrDefault();
-            foreach (Char i in myObject.MarketCode ){
-                Console.WriteLine(i);
+            //DataContext dc = new DataContext();
+            //var q =
+            //        (from a in dc.Market
+            //        where a.Status == "A"
+            //        select a).OrderBy(x => x.MarketCode);
+            //var myObject = q.SingleOrDefault();
+            //foreach (Char i in myObject.MarketCode ){
+            //    Console.WriteLine(i);
 
-            }
+            //}
             return View();
         }
 

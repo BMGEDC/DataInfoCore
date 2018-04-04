@@ -10,22 +10,22 @@ using DataInfoCore.Models;
 
 namespace DataInfoCore.Controllers
 {
-    public class MarketsController : Controller
+    public class ContactRolesController : Controller
     {
         private readonly DataContext _context;
 
-        public MarketsController(DataContext context)
+        public ContactRolesController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: Markets
+        // GET: ContactRoles
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Market.ToListAsync());
+            return View(await _context.ContactRole.ToListAsync());
         }
 
-        // GET: Markets/Details/5
+        // GET: ContactRoles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace DataInfoCore.Controllers
                 return NotFound();
             }
 
-            var market = await _context.Market
+            var contactRole = await _context.ContactRole
                 .SingleOrDefaultAsync(m => m.ID == id);
-            if (market == null)
+            if (contactRole == null)
             {
                 return NotFound();
             }
 
-            return View(market);
+            return View(contactRole);
         }
 
-        // GET: Markets/Create
+        // GET: ContactRoles/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Markets/Create
+        // POST: ContactRoles/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,MarketCode,MarketName,Eorders,Status")] Market market)
+        public async Task<IActionResult> Create([Bind("ID,ContactId,RoleId,WholesalerId")] ContactRole contactRole)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(market);
+                _context.Add(contactRole);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(market);
+            return View(contactRole);
         }
 
-        // GET: Markets/Edit/5
+        // GET: ContactRoles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace DataInfoCore.Controllers
                 return NotFound();
             }
 
-            var market = await _context.Market.SingleOrDefaultAsync(m => m.ID == id);
-            if (market == null)
+            var contactRole = await _context.ContactRole.SingleOrDefaultAsync(m => m.ID == id);
+            if (contactRole == null)
             {
                 return NotFound();
             }
-            return View(market);
+            return View(contactRole);
         }
 
-        // POST: Markets/Edit/5
+        // POST: ContactRoles/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,MarketCode,MarketName,Eorders,Status")] Market market)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,ContactId,RoleId,WholesalerId")] ContactRole contactRole)
         {
-            if (id != market.ID)
+            if (id != contactRole.ID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace DataInfoCore.Controllers
             {
                 try
                 {
-                    _context.Update(market);
+                    _context.Update(contactRole);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MarketExists(market.ID))
+                    if (!ContactRoleExists(contactRole.ID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace DataInfoCore.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(market);
+            return View(contactRole);
         }
 
-        // GET: Markets/Delete/5
+        // GET: ContactRoles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace DataInfoCore.Controllers
                 return NotFound();
             }
 
-            var market = await _context.Market
+            var contactRole = await _context.ContactRole
                 .SingleOrDefaultAsync(m => m.ID == id);
-            if (market == null)
+            if (contactRole == null)
             {
                 return NotFound();
             }
 
-            return View(market);
+            return View(contactRole);
         }
 
-        // POST: Markets/Delete/5
+        // POST: ContactRoles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var market = await _context.Market.SingleOrDefaultAsync(m => m.ID == id);
-            _context.Market.Remove(market);
+            var contactRole = await _context.ContactRole.SingleOrDefaultAsync(m => m.ID == id);
+            _context.ContactRole.Remove(contactRole);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MarketExists(int id)
+        private bool ContactRoleExists(int id)
         {
-            return _context.Market.Any(e => e.ID == id);
+            return _context.ContactRole.Any(e => e.ID == id);
         }
     }
 }

@@ -10,22 +10,22 @@ using DataInfoCore.Models;
 
 namespace DataInfoCore.Controllers
 {
-    public class MarketsController : Controller
+    public class ConfigsController : Controller
     {
         private readonly DataContext _context;
 
-        public MarketsController(DataContext context)
+        public ConfigsController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: Markets
+        // GET: Configs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Market.ToListAsync());
+            return View(await _context.Config.ToListAsync());
         }
 
-        // GET: Markets/Details/5
+        // GET: Configs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace DataInfoCore.Controllers
                 return NotFound();
             }
 
-            var market = await _context.Market
+            var config = await _context.Config
                 .SingleOrDefaultAsync(m => m.ID == id);
-            if (market == null)
+            if (config == null)
             {
                 return NotFound();
             }
 
-            return View(market);
+            return View(config);
         }
 
-        // GET: Markets/Create
+        // GET: Configs/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Markets/Create
+        // POST: Configs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,MarketCode,MarketName,Eorders,Status")] Market market)
+        public async Task<IActionResult> Create([Bind("ID,MarketID,WholesalerID,DataPeriod,Active,Function,DataRecieved,DataProcessed,DataUploaded,ProofSent,PagesApproved,Summary,ExternalProcess,ProcessStartTime,ProcessEndTIme")] Config config)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(market);
+                _context.Add(config);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(market);
+            return View(config);
         }
 
-        // GET: Markets/Edit/5
+        // GET: Configs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace DataInfoCore.Controllers
                 return NotFound();
             }
 
-            var market = await _context.Market.SingleOrDefaultAsync(m => m.ID == id);
-            if (market == null)
+            var config = await _context.Config.SingleOrDefaultAsync(m => m.ID == id);
+            if (config == null)
             {
                 return NotFound();
             }
-            return View(market);
+            return View(config);
         }
 
-        // POST: Markets/Edit/5
+        // POST: Configs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,MarketCode,MarketName,Eorders,Status")] Market market)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,MarketID,WholesalerID,DataPeriod,Active,Function,DataRecieved,DataProcessed,DataUploaded,ProofSent,PagesApproved,Summary,ExternalProcess,ProcessStartTime,ProcessEndTIme")] Config config)
         {
-            if (id != market.ID)
+            if (id != config.ID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace DataInfoCore.Controllers
             {
                 try
                 {
-                    _context.Update(market);
+                    _context.Update(config);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MarketExists(market.ID))
+                    if (!ConfigExists(config.ID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace DataInfoCore.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(market);
+            return View(config);
         }
 
-        // GET: Markets/Delete/5
+        // GET: Configs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace DataInfoCore.Controllers
                 return NotFound();
             }
 
-            var market = await _context.Market
+            var config = await _context.Config
                 .SingleOrDefaultAsync(m => m.ID == id);
-            if (market == null)
+            if (config == null)
             {
                 return NotFound();
             }
 
-            return View(market);
+            return View(config);
         }
 
-        // POST: Markets/Delete/5
+        // POST: Configs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var market = await _context.Market.SingleOrDefaultAsync(m => m.ID == id);
-            _context.Market.Remove(market);
+            var config = await _context.Config.SingleOrDefaultAsync(m => m.ID == id);
+            _context.Config.Remove(config);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MarketExists(int id)
+        private bool ConfigExists(int id)
         {
-            return _context.Market.Any(e => e.ID == id);
+            return _context.Config.Any(e => e.ID == id);
         }
     }
 }

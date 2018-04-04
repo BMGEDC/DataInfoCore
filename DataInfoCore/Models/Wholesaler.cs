@@ -14,15 +14,7 @@ namespace DataInfoCore.Models
         [StringLength(6)]
         public string WholesalerCode { get; set; }
         public string WholesalerName { get; set; }
-        public int BookContactID { get; set; }
-        public int BookContact1ID { get; set; }
-        public int WebContactID { get; set; }
-        public int WebContact1ID { get; set; }
-        public int ITContactID { get; set; }
-        public int OrderContactID { get; set; }
-        public int BookFileID { get; set; }
-        public int InvFileID { get; set; }
-        public int CustFileID { get; set; }
+       
         public Boolean  ETSUser { get; set; }
         public Boolean InBook { get; set; }
         public Boolean Online { get; set; }

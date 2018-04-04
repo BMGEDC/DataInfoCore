@@ -1,0 +1,89 @@
+﻿@model IEnumerable<DataInfoCore.Models.Wholesaler>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Market)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WholesalerCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WholesalerName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ETSUser)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InBook)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Online)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DailyFeed)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustomerFeed)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comments)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ETSLocation)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Market)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WholesalerCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WholesalerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ETSUser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InBook)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Online)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DailyFeed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerFeed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ETSLocation)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

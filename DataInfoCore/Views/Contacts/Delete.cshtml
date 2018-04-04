@@ -1,4 +1,4 @@
-﻿@model DataInfoCore.Models.Market
+﻿@model DataInfoCore.Models.Contact
 
 @{
     ViewData["Title"] = "Delete";
@@ -8,37 +8,37 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Market</h4>
+    <h4>Contact</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.MarketCode)
+            @Html.DisplayNameFor(model => model.WholesalerID)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.MarketCode)
+            @Html.DisplayFor(model => model.WholesalerID)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.MarketName)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.MarketName)
+            @Html.DisplayFor(model => model.Name)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Eorders)
+            @Html.DisplayNameFor(model => model.Phone)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Eorders)
+            @Html.DisplayFor(model => model.Phone)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.EMail)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Status)
+            @Html.DisplayFor(model => model.EMail)
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="ID" />
+        <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
         <a asp-action="Index">Back to List</a>
     </form>

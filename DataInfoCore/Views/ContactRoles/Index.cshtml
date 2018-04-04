@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DataInfoCore.Models.Market>
+﻿@model IEnumerable<DataInfoCore.Models.ContactRole>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,16 +13,13 @@
     <thead>
         <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.MarketCode)
+                    @Html.DisplayNameFor(model => model.ContactId)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.MarketName)
+                    @Html.DisplayNameFor(model => model.RoleId)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Eorders)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Status)
+                    @Html.DisplayNameFor(model => model.WholesalerId)
                 </th>
             <th></th>
         </tr>
@@ -31,16 +28,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.MarketCode)
+                @Html.DisplayFor(modelItem => item.ContactId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MarketName)
+                @Html.DisplayFor(modelItem => item.RoleId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Eorders)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                @Html.DisplayFor(modelItem => item.WholesalerId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

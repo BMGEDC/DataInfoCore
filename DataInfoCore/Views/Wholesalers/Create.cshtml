@@ -1,0 +1,88 @@
+﻿@model DataInfoCore.Models.Wholesaler
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Wholesaler</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Market" class="control-label"></label>
+                <input asp-for="Market" class="form-control" />
+                <span asp-validation-for="Market" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WholesalerCode" class="control-label"></label>
+                <input asp-for="WholesalerCode" class="form-control" />
+                <span asp-validation-for="WholesalerCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WholesalerName" class="control-label"></label>
+                <input asp-for="WholesalerName" class="form-control" />
+                <span asp-validation-for="WholesalerName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ETSUser" /> @Html.DisplayNameFor(model => model.ETSUser)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="InBook" /> @Html.DisplayNameFor(model => model.InBook)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Online" /> @Html.DisplayNameFor(model => model.Online)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="DailyFeed" /> @Html.DisplayNameFor(model => model.DailyFeed)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="CustomerFeed" /> @Html.DisplayNameFor(model => model.CustomerFeed)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Comments" class="control-label"></label>
+                <input asp-for="Comments" class="form-control" />
+                <span asp-validation-for="Comments" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ETSLocation" class="control-label"></label>
+                <input asp-for="ETSLocation" class="form-control" />
+                <span asp-validation-for="ETSLocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

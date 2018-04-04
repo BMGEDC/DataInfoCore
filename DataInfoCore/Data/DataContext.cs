@@ -22,5 +22,7 @@ namespace DataInfoCore.Data
         public DbSet<Contact> Contact { get; set; }
         public DbSet<Communication> Communication { get; set; }
         public DbSet<Processlog> Processlog { get; set; }
+        public DbSet<Role> Role { get; set; }
+        public DbSet<ContactRole> ContactRole { get; set; }
     }
 }
