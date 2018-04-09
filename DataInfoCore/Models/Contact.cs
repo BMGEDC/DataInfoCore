@@ -14,5 +14,7 @@ namespace DataInfoCore.Models
         public string Name { get; set; }
         public string Phone { get; set; }
         public string EMail { get; set; }
+        public virtual Wholesaler Wholesaler { get; set; }
+        
             }
 }

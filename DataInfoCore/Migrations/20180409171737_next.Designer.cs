@@ -11,9 +11,10 @@ using System;
 namespace DataInfoCore.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180409171737_next")]
+    partial class next
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,6 +117,8 @@ namespace DataInfoCore.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("ConfigID");
+
                     b.Property<string>("Eorders")
                         .HasMaxLength(1);
 
@@ -130,6 +133,8 @@ namespace DataInfoCore.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("ConfigID");
+
                     b.ToTable("Market");
                 });
 
@@ -139,8 +144,6 @@ namespace DataInfoCore.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Comment");
-
-                    b.Property<int>("ConfigID");
 
                     b.Property<DateTime>("Logdate");
 
@@ -171,6 +174,8 @@ namespace DataInfoCore.Migrations
 
                     b.Property<string>("Comments");
 
+                    b.Property<int?>("ConfigID");
+
                     b.Property<bool>("CustomerFeed");
 
                     b.Property<bool>("DailyFeed");
@@ -193,7 +198,23 @@ namespace DataInfoCore.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("ConfigID");
+
                     b.ToTable("Wholesaler");
+                });
+
+            modelBuilder.Entity("DataInfoCore.Models.Market", b =>
+                {
+                    b.HasOne("DataInfoCore.Models.Config")
+                        .WithMany("MarketCollection")
+                        .HasForeignKey("ConfigID");
+                });
+
+            modelBuilder.Entity("DataInfoCore.Models.Wholesaler", b =>
+                {
+                    b.HasOne("DataInfoCore.Models.Config")
+                        .WithMany("WholesalerCollection")
+                        .HasForeignKey("ConfigID");
                 });
 #pragma warning restore 612, 618
         }

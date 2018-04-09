@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataInfoCore.Models
 {
@@ -26,16 +28,17 @@ namespace DataInfoCore.Models
         // B = Import for Magazine
         // I = Inventory Status
         // R = Report
-        public DateTime DataRecieved { get; set; }
-        public DateTime DataProcessed { get; set; }
-        public DateTime DataUploaded { get; set; }
-        public DateTime ProofSent { get; set; }
-        public DateTime PagesApproved { get; set; }
+        public DateTime? DataRecieved { get; set; }
+        public DateTime? DataProcessed { get; set; }
+        public DateTime? DataUploaded { get; set; }
+        public DateTime? ProofSent { get; set; }
+        public DateTime? PagesApproved { get; set; }
         public string Summary { get; set; } // Short Description of Task
         public string ExternalProcess { get; set; } //Name of DLL function, Fox EXE or other function to call 
-        public DateTime ProcessStartTime { get; set; }
-        public DateTime ProcessEndTIme { get; set; }
-
+        public DateTime? ProcessStartTime { get; set; }
+        public DateTime? ProcessEndTIme { get; set; }
+        
+        
 
 
     }

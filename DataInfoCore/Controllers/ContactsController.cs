@@ -22,7 +22,8 @@ namespace DataInfoCore.Controllers
         // GET: Contacts
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Contact.ToListAsync());
+            var dataContext = _context.Contact.Include(c => c.Wholesaler);
+            return View(await dataContext.ToListAsync());
         }
 
         // GET: Contacts/Details/5
@@ -34,6 +35,7 @@ namespace DataInfoCore.Controllers
             }
 
             var contact = await _context.Contact
+                .Include(c => c.Wholesaler)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (contact == null)
             {
@@ -46,6 +48,7 @@ namespace DataInfoCore.Controllers
         // GET: Contacts/Create
         public IActionResult Create()
         {
+            ViewData["WholesalerID"] = new SelectList(_context.Wholesaler, "ID", "ID");
             return View();
         }
 
@@ -62,6 +65,7 @@ namespace DataInfoCore.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["WholesalerID"] = new SelectList(_context.Wholesaler, "ID", "ID", contact.WholesalerID);
             return View(contact);
         }
 
@@ -78,6 +82,7 @@ namespace DataInfoCore.Controllers
             {
                 return NotFound();
             }
+            ViewData["WholesalerID"] = new SelectList(_context.Wholesaler, "ID", "ID", contact.WholesalerID);
             return View(contact);
         }
 
@@ -113,6 +118,7 @@ namespace DataInfoCore.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["WholesalerID"] = new SelectList(_context.Wholesaler, "ID", "ID", contact.WholesalerID);
             return View(contact);
         }
 
@@ -125,6 +131,7 @@ namespace DataInfoCore.Controllers
             }
 
             var contact = await _context.Contact
+                .Include(c => c.Wholesaler)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (contact == null)
             {
