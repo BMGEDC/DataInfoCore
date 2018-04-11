@@ -39,7 +39,8 @@ namespace DataInfoCore.Models
         public DateTime? ProcessEndTIme { get; set; }
         
         
-
+        public virtual Wholesaler Wholesaler { get; set; }
+        public virtual Market Market { get; set; }
 
     }
 }

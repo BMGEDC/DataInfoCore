@@ -48,7 +48,16 @@ namespace DataInfoCore.Controllers
         // GET: Contacts/Create
         public IActionResult Create()
         {
-            ViewData["WholesalerID"] = new SelectList(_context.Wholesaler, "ID", "ID");
+           
+            IEnumerable<SelectListItem> WholesalerItems = _context.Wholesaler.AsEnumerable().Select(c => new SelectListItem()
+            {
+                Text = c.WholesalerName,
+                Value = c.ID.ToString(),
+                Selected = false,
+            });
+            SelectList WholesalerList = new SelectList(WholesalerItems, "Value", "Text");
+            ViewBag.WholesalerList = WholesalerList;
+         //   ViewData["WholesalerID"] = new SelectList(_context.Wholesaler, "ID", "ID");
             return View();
         }
 
@@ -82,7 +91,8 @@ namespace DataInfoCore.Controllers
             {
                 return NotFound();
             }
-            ViewData["WholesalerID"] = new SelectList(_context.Wholesaler, "ID", "ID", contact.WholesalerID);
+            ViewData["WholesalerID"] = new SelectList(_context.Wholesaler, "ID", "WholesalerName", contact.WholesalerID);
+            //ViewBag.WholesalerList = new SelectList(_context.Wholesaler, "ID", "MarketName", wholesaler.MarketID);
             return View(contact);
         }
 

@@ -22,7 +22,8 @@ namespace DataInfoCore.Controllers
         // GET: Wholesalers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Wholesaler.ToListAsync());
+            var dataContext = _context.Wholesaler.Include(c => c.Market);
+            return View(await dataContext.ToListAsync());
         }
 
         // GET: Wholesalers/Details/5
@@ -46,6 +47,15 @@ namespace DataInfoCore.Controllers
         // GET: Wholesalers/Create
         public IActionResult Create()
         {
+            // ADDED CODE TO show market anmes
+            IEnumerable<SelectListItem> MarketItems = _context.Market.AsEnumerable().Select(c => new SelectListItem()
+            {
+                Text = c.MarketName,
+                Value = c.ID.ToString(),
+                Selected = false,
+            });
+            SelectList MarketList = new SelectList(MarketItems, "Value", "Text");
+            ViewBag.MarketList = MarketList;
             return View();
         }
 
@@ -54,7 +64,7 @@ namespace DataInfoCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Market,WholesalerCode,WholesalerName,ETSUser,InBook,Online,DailyFeed,CustomerFeed,Comments,ETSLocation")] Wholesaler wholesaler)
+        public async Task<IActionResult> Create([Bind("ID,MarketID,WholesalerCode,WholesalerName,ETSUser,InBook,Online,DailyFeed,CustomerFeed,Comments,ETSLocation")] Wholesaler wholesaler)
         {
             if (ModelState.IsValid)
             {
@@ -72,12 +82,14 @@ namespace DataInfoCore.Controllers
             {
                 return NotFound();
             }
-
+            
             var wholesaler = await _context.Wholesaler.SingleOrDefaultAsync(m => m.ID == id);
             if (wholesaler == null)
             {
                 return NotFound();
             }
+            ViewBag.MarketList = new SelectList(_context.Market, "ID", "MarketName", wholesaler.MarketID);
+            
             return View(wholesaler);
         }
 
@@ -86,7 +98,7 @@ namespace DataInfoCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Market,WholesalerCode,WholesalerName,ETSUser,InBook,Online,DailyFeed,CustomerFeed,Comments,ETSLocation")] Wholesaler wholesaler)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,MarketID,WholesalerCode,WholesalerName,ETSUser,InBook,Online,DailyFeed,CustomerFeed,Comments,ETSLocation")] Wholesaler wholesaler)
         {
             if (id != wholesaler.ID)
             {
@@ -113,6 +125,8 @@ namespace DataInfoCore.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.MarketList = new SelectList(_context.Market, "ID", "MarketName", wholesaler.MarketID);
             return View(wholesaler);
         }
 

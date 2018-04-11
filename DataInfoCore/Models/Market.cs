@@ -17,6 +17,7 @@ namespace DataInfoCore.Models
         public String Eorders { get; set; }
         [StringLength(1)]
         public String Status { get; set; }
+        public int sort { get; set; }
 
 
     }

@@ -12,7 +12,12 @@ namespace DataInfoCore.Data
         public DataContext()
         {
         }
-
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Contact>()
+                 .HasIndex(u => u.EMail)
+                 .IsUnique();
+        }
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }
@@ -24,5 +29,6 @@ namespace DataInfoCore.Data
         public DbSet<Processlog> Processlog { get; set; }
         public DbSet<Role> Role { get; set; }
         public DbSet<ContactRole> ContactRole { get; set; }
+        public DbSet<WholesalerInfo> WholesalerInfo { get; set; }
     }
 }

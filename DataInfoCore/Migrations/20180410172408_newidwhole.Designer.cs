@@ -11,9 +11,10 @@ using System;
 namespace DataInfoCore.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180410172408_newidwhole")]
+    partial class newidwhole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,10 +97,6 @@ namespace DataInfoCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EMail")
-                        .IsUnique()
-                        .HasFilter("[EMail] IS NOT NULL");
-
                     b.HasIndex("WholesalerID");
 
                     b.ToTable("Contact");
@@ -137,8 +134,6 @@ namespace DataInfoCore.Migrations
 
                     b.Property<string>("Status")
                         .HasMaxLength(1);
-
-                    b.Property<int>("sort");
 
                     b.HasKey("ID");
 
@@ -197,135 +192,16 @@ namespace DataInfoCore.Migrations
 
                     b.Property<bool>("Online");
 
-                    b.Property<string>("Price_Zone")
-                        .HasMaxLength(3);
-
                     b.Property<string>("WholesalerCode")
                         .HasMaxLength(6);
 
                     b.Property<string>("WholesalerName");
-
-                    b.Property<string>("bm_id")
-                        .HasMaxLength(10);
-
-                    b.Property<string>("org_id")
-                        .HasMaxLength(10);
 
                     b.HasKey("ID");
 
                     b.HasIndex("MarketID");
 
                     b.ToTable("Wholesaler");
-                });
-
-            modelBuilder.Entity("DataInfoCore.Models.WholesalerInfo", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Desc");
-
-                    b.Property<string>("Fax")
-                        .HasMaxLength(30);
-
-                    b.Property<string>("MainPhone")
-                        .HasMaxLength(30);
-
-                    b.Property<int>("WholesalerID");
-
-                    b.Property<string>("address1")
-                        .HasMaxLength(30);
-
-                    b.Property<string>("address2")
-                        .HasMaxLength(30);
-
-                    b.Property<string>("address3")
-                        .HasMaxLength(30);
-
-                    b.Property<string>("allowedits")
-                        .HasMaxLength(2);
-
-                    b.Property<string>("avail_mess")
-                        .HasMaxLength(250);
-
-                    b.Property<string>("city")
-                        .HasMaxLength(30);
-
-                    b.Property<string>("cutoff_tm")
-                        .HasMaxLength(10);
-
-                    b.Property<string>("dba");
-
-                    b.Property<DateTime>("downstart");
-
-                    b.Property<string>("facetsname")
-                        .HasMaxLength(150);
-
-                    b.Property<string>("faxcheck")
-                        .HasMaxLength(1);
-
-                    b.Property<float>("freeshpamt");
-
-                    b.Property<int>("itemcnt");
-
-                    b.Property<string>("level3")
-                        .HasMaxLength(1);
-
-                    b.Property<float>("min_case");
-
-                    b.Property<string>("min_type")
-                        .HasMaxLength(1);
-
-                    b.Property<float>("newratcnt");
-
-                    b.Property<string>("nostockmsg");
-
-                    b.Property<string>("novirtual")
-                        .HasMaxLength(1);
-
-                    b.Property<string>("policies");
-
-                    b.Property<string>("rejectord")
-                        .HasMaxLength(1);
-
-                    b.Property<float>("ship_fee");
-
-                    b.Property<string>("show_blind")
-                        .HasMaxLength(1);
-
-                    b.Property<string>("skipfaxord")
-                        .HasMaxLength(1);
-
-                    b.Property<int>("smancnt");
-
-                    b.Property<float>("split_fee");
-
-                    b.Property<int>("sqlfailno");
-
-                    b.Property<string>("state")
-                        .HasMaxLength(2);
-
-                    b.Property<string>("statusrpt")
-                        .HasMaxLength(1);
-
-                    b.Property<DateTime>("strepstamp");
-
-                    b.Property<DateTime>("tstamp");
-
-                    b.Property<string>("usewhdesc")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("webname")
-                        .HasMaxLength(150);
-
-                    b.Property<string>("zip")
-                        .HasMaxLength(10);
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("WholesalerID");
-
-                    b.ToTable("WholesalerInfo");
                 });
 
             modelBuilder.Entity("DataInfoCore.Models.Config", b =>
@@ -354,14 +230,6 @@ namespace DataInfoCore.Migrations
                     b.HasOne("DataInfoCore.Models.Market", "Market")
                         .WithMany()
                         .HasForeignKey("MarketID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("DataInfoCore.Models.WholesalerInfo", b =>
-                {
-                    b.HasOne("DataInfoCore.Models.Wholesaler", "Wholesaler")
-                        .WithMany()
-                        .HasForeignKey("WholesalerID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

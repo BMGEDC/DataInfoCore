@@ -9,63 +9,49 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table" >
     <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.MarketID)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.WholesalerID)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DataPeriod)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Active)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Function)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DataRecieved)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DataProcessed)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DataUploaded)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ProofSent)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PagesApproved)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Summary)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ExternalProcess)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ProcessStartTime)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ProcessEndTIme)
-                </th>
-            <th></th>
-        </tr>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Market.MarketName)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Wholesaler.WholesalerName)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Summary)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.DataPeriod)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Active)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Function)
+			</th>
+
+
+			<th>
+				@Html.DisplayNameFor(model => model.ExternalProcess)
+			</th>
+
+			<th></th>
+		</tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.MarketID)
+                @Html.DisplayFor(modelItem => item.Market.MarketName)
             </td>
+			
             <td>
-                @Html.DisplayFor(modelItem => item.WholesalerID)
+                @Html.DisplayFor(modelItem => item.Wholesaler.WholesalerName)
             </td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Summary)
+			</td>
             <td>
                 @Html.DisplayFor(modelItem => item.DataPeriod)
             </td>
@@ -75,33 +61,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Function)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataRecieved)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataProcessed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataUploaded)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProofSent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PagesApproved)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Summary)
-            </td>
+            
+            
             <td>
                 @Html.DisplayFor(modelItem => item.ExternalProcess)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProcessStartTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProcessEndTIme)
-            </td>
+           
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ID">Details</a> |

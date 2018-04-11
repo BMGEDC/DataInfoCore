@@ -22,7 +22,8 @@ namespace DataInfoCore.Controllers
         // GET: Configs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Config.ToListAsync());
+            var dataContext = _context.Config.Include(c => c.Wholesaler).Include(d => d.Market); ;
+            return View(await dataContext.ToListAsync());
         }
 
         // GET: Configs/Details/5
@@ -46,6 +47,7 @@ namespace DataInfoCore.Controllers
         // GET: Configs/Create
         public IActionResult Create()
         {
+            ViewBag.WholesalerList = new SelectList(_context.Wholesaler, "ID", "WholesalerName");
             return View();
         }
         
@@ -78,6 +80,8 @@ namespace DataInfoCore.Controllers
             {
                 return NotFound();
             }
+            ViewBag.MarketList = new SelectList(_context.Market, "ID", "MarketName", config.MarketID);
+            ViewBag.WholesalerList = new SelectList(_context.Wholesaler , "ID", "WholesalerName", config.WholesalerID);
             return View(config);
         }
 

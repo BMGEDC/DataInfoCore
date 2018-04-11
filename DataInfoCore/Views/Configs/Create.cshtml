@@ -20,13 +20,12 @@
             </div>
 			<div class="form-group">
 				@Html.DisplayNameFor(model => model.WholesalerID)
-				<br />
-				@Html.DropDownListFor(model => model.WholesalerID, Model.WholesalerCollection,"WholesalerID","WholesalerName"),"Select")
+				
 
 			</div>
             <div class="form-group">
                 <label asp-for="WholesalerID" class="control-label"></label>
-                <input asp-for="WholesalerID" class="form-control" />
+                <select asp-for="WholesalerID" class="form-control" asp-items="ViewBag.WholesalerList"/>
                 <span asp-validation-for="WholesalerID" class="text-danger"></span>
             </div>
             <div class="form-group">
